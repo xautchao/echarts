@@ -15,6 +15,7 @@ define(function (require) {
     var RectangleShape = require('zrender/shape/Rectangle');
     var LineShape = require('zrender/shape/Line');
     var PolygonShape = require('zrender/shape/Polygon');
+    var PolylineShape = require('zrender/shape/Polyline');
     var EllipseShape = require('zrender/shape/Ellipse');
     var ZrImage = require('zrender/shape/Image');
     // 组件依赖
@@ -846,17 +847,17 @@ define(function (require) {
                            ),
                     style : {
                         brushType : 'fill',
-                        x : style.textX,
-                        y : style.textY,
+                        x : style.x,//style.textX,
+                        y : style.y,//style.textY,
                         text : this.getLabelText(name, value, queryTarget, 'normal'),
                         _name : name,
                         textAlign : 'center',
-                        color : this.deepQuery(queryTarget, 'itemStyle.normal.label.show')
+                        color : style.color/*this.deepQuery(queryTarget, 'itemStyle.normal.label.show')
                                 ? this.deepQuery(
                                       queryTarget,
                                       'itemStyle.normal.label.textStyle.color'
                                   )
-                                : 'rgba(0,0,0,0)',
+                                : 'rgba(0,0,0,0)',*/
                         textFont : this.getFont(font)
                     }
                 };
@@ -909,6 +910,9 @@ define(function (require) {
                         break;
                     case 'polygon' :
                         shape = new PolygonShape(shape);
+                        break;
+                    case 'polyline':
+    					shape = new PolylineShape(shape);
                         break;
                     case 'ellipse':
                         shape = new EllipseShape(shape);
